@@ -1,6 +1,5 @@
 name: CI/CD Workflow for Amara Florist
 
-# Memicu alur kerja (workflow) setiap ada push atau pull request ke branch utama
 on:
   push:
     branches: [ "main", "master" ]
@@ -12,25 +11,23 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    # Langkah 1: Mengambil kode dari repositori GitHub
     - name: Checkout repository
       uses: actions/checkout@v4
 
-    # Langkah 2: Menyiapkan lingkungan Node.js
+    # Langkah 2: Menyiapkan lingkungan Node.js (Tanpa Cache untuk menghindari error lockfile)
     - name: Setup Node.js environment
       uses: actions/setup-node@v4
       with:
-        node-version: '20' # Anda bisa mengubah versi ini sesuai kebutuhan proyek
-        cache: 'npm'       # Mengaktifkan cache untuk mempercepat instalasi dependencies
+        node-version: '20'
 
-    # Langkah 3: Menginstal semua dependencies yang ada di package.json
+    # Langkah 3: Menginstal semua dependencies menggunakan npm install
     - name: Install dependencies
-      run: npm ci
+      run: npm install --legacy-peer-deps
 
-    # Langkah 4: Menjalankan proses build (jika ada, misal React, Vue, Next.js)
+    # Langkah 4: Menjalankan proses build
     - name: Build project
       run: npm run build --if-present
 
-    # Langkah 5: Menjalankan pengujian otomatis (automated testing)
+    # Langkah 5: Menjalankan pengujian otomatis
     - name: Run tests
       run: npm test --if-present
