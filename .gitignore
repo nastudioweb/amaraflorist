@@ -1,0 +1,14 @@
+node_modules/
+build/
+dist/
+coverage/
+.DS_Store
+*.log
+.env*
+!.env.example
+.aistudio/
+.vite/
+
+# Pastikan semua aset gambar dipertahankan dan di-track git
+!src/assets/images/*
+!public/images/*
