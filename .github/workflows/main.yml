@@ -6,7 +6,6 @@ on:
   pull_request:
     branches: [ "main", "master" ]
 
-# Berikan izin keamanan untuk mendepoly ke GitHub Pages
 permissions:
   contents: read
   pages: write
@@ -28,15 +27,19 @@ jobs:
     - name: Install dependencies
       run: npm install --legacy-peer-deps
 
-    # Proses compile dari .tsx menjadi HTML/JS biasa di folder dist
+    # Langkah penting: Mengubah .tsx menjadi JavaScript biasa ke dalam folder dist
     - name: Build project
       run: npm run build
 
-    # Mengunggah hasil build folder dist ke server GitHub Pages
+    # Memastikan folder dist benar-benar ada sebelum diunggah
+    - name: Check build output
+      run: ls -la dist
+
+    # Mengunggah isi folder dist (BUKAN folder utama) ke server GitHub Pages
     - name: Upload artifact
       uses: actions/upload-pages-artifact@v3
       with:
-        path: './dist' # Mengarah ke folder hasil build Vite
+        path: './dist' 
 
   deploy:
     environment:
