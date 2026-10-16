@@ -105,7 +105,7 @@ Jika Anda ingin mengunggah proyek ini ke akun GitHub Anda:
    git push -u origin main
    ```
 
-*(Ganti `<USERNAME-ANDA>` dengan username GitHub Anda).*
+*(Ganti `amaraflorist` dengan username GitHub Anda).*
 
 ---
 
